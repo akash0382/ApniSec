@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  color: #e2e8f0; /* slate-200 */
+  background: #0f172a; /* slate-900 */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+input,
+textarea,
+select,
+button {
+  color: #e2e8f0;
+  background-color: #1e293b; /* slate-800 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b; /* slate-500 */
+}
