@@ -4,7 +4,9 @@ export class ApiClient {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_APP_URL || "";
+    // In the browser, we use relative paths to avoid CORS issues and configuration errors.
+    // On the server, we use the provided NEXT_PUBLIC_APP_URL.
+    this.baseUrl = typeof window !== "undefined" ? "" : (process.env.NEXT_PUBLIC_APP_URL || "");
   }
 
   private async request<T>(

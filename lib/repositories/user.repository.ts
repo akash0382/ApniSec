@@ -82,11 +82,7 @@ export class UserRepository {
   }
 
   async createPasswordResetToken(userId: string, token: string, expiresAt: Date) {
-    const delegate = (prisma as any).passwordResetToken;
-    if (!delegate || typeof delegate.create !== "function") {
-      throw new Error("PasswordResetToken model is not available. Please run `npm run db:generate` and `npm run db:push`.");
-    }
-    return delegate.create({
+    return prisma.passwordResetToken.create({
       data: {
         userId,
         token,
@@ -96,22 +92,14 @@ export class UserRepository {
   }
 
   async findPasswordResetToken(token: string) {
-    const delegate = (prisma as any).passwordResetToken;
-    if (!delegate || typeof delegate.findUnique !== "function") {
-      return null;
-    }
-    return delegate.findUnique({
+    return prisma.passwordResetToken.findUnique({
       where: { token },
       include: { user: true },
     });
   }
 
   async deletePasswordResetToken(token: string) {
-    const delegate = (prisma as any).passwordResetToken;
-    if (!delegate || typeof delegate.delete !== "function") {
-      return;
-    }
-    return delegate.delete({
+    return prisma.passwordResetToken.delete({
       where: { token },
     });
   }
